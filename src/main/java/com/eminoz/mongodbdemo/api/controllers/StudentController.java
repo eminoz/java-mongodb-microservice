@@ -22,25 +22,22 @@ public class StudentController {
     }
 
     @GetMapping("/getAll")
-    public  List<Student>  getAllUser(@RequestParam("email") String email) {
-        System.out.println(email);
+    public DataResult<List<Student>> getAllUser(@RequestParam("email") String email) {
         return this.studentService.getAll(email);
     }
 
     @DeleteMapping("/delete/{email}")
-    public Result deleteStudent(@PathVariable("email") String email) {
-        System.out.println(email);
+    public DataResult<Student> deleteStudent(@PathVariable("email") String email) {
         return this.studentService.deleteStudent(email);
     }
 
     @PostMapping("/createStudent")
-    public Result createStudent(@RequestBody Student student) {
+    public DataResult<String> createStudent(@RequestBody Student student) {
         return this.studentService.createStudent(student);
     }
 
     @GetMapping("/getByProductName/{id}")
-    public List<Student> getByProductName(@PathVariable("id") String id) {
-        System.out.println("id" + id);
+    public DataResult<Student> getByProductName(@PathVariable("id") String id) {
         return this.studentService.getStudentById(id);
     }
 }

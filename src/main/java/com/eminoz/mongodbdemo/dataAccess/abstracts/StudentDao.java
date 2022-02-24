@@ -12,6 +12,6 @@ public interface StudentDao extends MongoRepository<Student, String> {
 
     Student deleteStudentByEmail(String email);
 
-    List<Student> findStudentById(String id);
+    Student findStudentById(String id);
 
 }

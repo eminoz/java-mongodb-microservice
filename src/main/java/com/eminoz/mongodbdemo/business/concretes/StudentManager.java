@@ -1,6 +1,7 @@
 package com.eminoz.mongodbdemo.business.concretes;
 
 import com.eminoz.mongodbdemo.business.abstracts.StudentService;
+import com.eminoz.mongodbdemo.core.utilities.results.DataResult;
 import com.eminoz.mongodbdemo.core.utilities.results.Result;
 import com.eminoz.mongodbdemo.core.utilities.results.SuccessDataResult;
 import com.eminoz.mongodbdemo.dataAccess.abstracts.StudentDao;
@@ -17,26 +18,25 @@ public class StudentManager implements StudentService {
 
 
     @Override
-    public List<Student> getAll(String email) {
-        System.out.println(email);
-        return this.studentDao.findStudentByEmail(email);
+    public DataResult<List<Student>> getAll(String email) {
+        return new SuccessDataResult<List<Student>>(this.studentDao.findStudentByEmail(email),"user find by id");
     }
 
     @Override
-    public Result deleteStudent(String email) {
+    public DataResult<Student> deleteStudent(String email) {
         Student deleteStudentByEmail = this.studentDao.deleteStudentByEmail(email);
-        return new SuccessDataResult<String>(deleteStudentByEmail.getEmail(), " named user deleted");
+        return new SuccessDataResult<Student>(deleteStudentByEmail, " named user deleted");
 
     }
 
     @Override
-    public Result createStudent(Student student) {
+    public SuccessDataResult<String> createStudent(Student student) {
         Student insert = this.studentDao.insert(student);
         return new SuccessDataResult<String>(insert.getId(), "user created");
     }
 
     @Override
-    public List<Student> getStudentById(String id) {
-        return this.studentDao.findStudentById(id);
+    public DataResult<Student> getStudentById(String id) {
+        return new SuccessDataResult<Student>(this.studentDao.findStudentById(id), "Data Returned");
     }
 }

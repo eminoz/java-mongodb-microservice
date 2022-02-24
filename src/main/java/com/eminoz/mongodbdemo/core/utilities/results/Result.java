@@ -1,6 +1,6 @@
 package com.eminoz.mongodbdemo.core.utilities.results;
 
-public class Result {
+public class Result {// Super type
     private boolean success;
     private String message;
 
